@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SkidmarksMat
+  m_Name: Mat_Skidmarks
   m_Shader: {fileID: 4800000, guid: 748797bf246665248b65ec17e29bd275, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
