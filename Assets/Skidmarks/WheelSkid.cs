@@ -42,13 +42,13 @@ public class WheelSkid : MonoBehaviour {
 			// Check sideways speed
 
 			// Gives velocity with +z being the car's forward axis
-			Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
+			Vector3 localVelocity = transform.InverseTransformDirection(rb.linearVelocity);
 			float skidTotal = Mathf.Abs(localVelocity.x);
 
 			// Check wheel spin as well
 
 			float wheelAngularVelocity = wheelCollider.radius * ((2 * Mathf.PI * wheelCollider.rpm) / 60);
-			float carForwardVel = Vector3.Dot(rb.velocity, transform.forward);
+			float carForwardVel = Vector3.Dot(rb.linearVelocity, transform.forward);
 			float wheelSpin = Mathf.Abs(carForwardVel - wheelAngularVelocity) * WHEEL_SLIP_MULTIPLIER;
 
 			// NOTE: This extra line should not be needed and you can take it out if you have decent wheel physics
@@ -62,7 +62,7 @@ public class WheelSkid : MonoBehaviour {
 			if (skidTotal >= SKID_FX_SPEED) {
 				float intensity = Mathf.Clamp01(skidTotal / MAX_SKID_INTENSITY);
 				// Account for further movement since the last FixedUpdate
-				Vector3 skidPoint = wheelHitInfo.point + (rb.velocity * (Time.time - lastFixedUpdateTime));
+				Vector3 skidPoint = wheelHitInfo.point + (rb.linearVelocity * (Time.time - lastFixedUpdateTime));
 				lastSkid = skidmarksController.AddSkidMark(skidPoint, wheelHitInfo.normal, intensity, lastSkid);
 			}
 			else {
